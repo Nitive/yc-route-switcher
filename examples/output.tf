@@ -15,6 +15,6 @@ output "vm_username" {
 }
 
 output "test_vm_password" {
-  value = random_string.test_vm_password.result
+  value     = random_string.test_vm_password.result
   sensitive = true
 }

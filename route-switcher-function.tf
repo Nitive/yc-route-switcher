@@ -36,9 +36,9 @@ resource "yandex_function" "route-switcher" {
 
 resource "yandex_function_trigger" "route_switcher_trigger" {
   depends_on = [yandex_storage_object.route_switcher_config]
-  folder_id = var.folder_id
-  name = "route-switcher-trigger-${random_string.prefix.result}"
-  count = var.start_module ? 1 : 0
+  folder_id  = var.folder_id
+  name       = "route-switcher-trigger-${random_string.prefix.result}"
+  count      = var.start_module ? 1 : 0
 
   function {
     id                 = yandex_function.route-switcher.id

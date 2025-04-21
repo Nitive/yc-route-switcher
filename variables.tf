@@ -17,9 +17,9 @@ variable "route_table_folder_list" {
 }
 
 variable "route_table_list" {
-    description = "List of route tables id which are protected by route-switcher"
-    type = list(string)
-    default     = []
+  description = "List of route tables id which are protected by route-switcher"
+  type        = list(string)
+  default     = []
 }
 
 variable "router_healthcheck_port" {
@@ -37,12 +37,12 @@ variable "back_to_primary" {
 variable "routers" {
   description = "List of routers. For each router specify its healtchecked ip address with subnet, list of router interfaces with ip addresses used as next hops in route tables and corresponding backup peer router ip adresses."
   type = list(object({
-    healthchecked_ip = string  # ip address which will be checked by NLB to obtain router status. Usually located in management network.
+    healthchecked_ip        = string # ip address which will be checked by NLB to obtain router status. Usually located in management network.
     healthchecked_subnet_id = string # subnet id of healthchecked ip address
     interfaces = list(object({
-      own_ip = string           # ip address of router interface
-      backup_peer_ip = string   # ip address of backup router, which will be used to switch next hop for a static route in case of a router failure
-    })) 
+      own_ip         = string # ip address of router interface
+      backup_peer_ip = string # ip address of backup router, which will be used to switch next hop for a static route in case of a router failure
+    }))
   }))
   default = []
 }
@@ -50,17 +50,17 @@ variable "routers" {
 variable "route_switcher_sa_roles" {
   description = "Roles that are needed for route-switcher service account"
   type        = list(string)
-  default = ["load-balancer.privateAdmin", "serverless.functions.invoker", "storage.editor", "monitoring.editor"]
+  default     = ["load-balancer.privateAdmin", "serverless.functions.invoker", "storage.editor", "monitoring.editor"]
 }
 
 variable "cron_interval" {
   description = "Interval in minutes for launching route-switcher function. If changing default value manually change cron_expression value in route_switcher_trigger accordingly to specified interval."
-  type = number
-  default = 1
+  type        = number
+  default     = 1
 }
 
 variable "router_healthcheck_interval" {
   description = "Interval in seconds for checking routers status using NLB healthcheck. Changing interval to value lower than 10 sec is not recommended. If changing default values additional test is recommended for failure scenarios."
-  type = number
-  default = 60
+  type        = number
+  default     = 60
 }
